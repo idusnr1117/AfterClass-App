@@ -1,5 +1,8 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
+import { BLACK, GRAY, PRIMARYA } from '../colors';
+import { useState } from 'react';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const keyboardTypes = {
   DEFAULT: 'default',
@@ -11,18 +14,38 @@ export const returnKeyTypes = {
   NEXT: 'next',
 };
 
-const Input = ({ title, placeholder, returnKeyType, ...props }) => {
+export const IconNames = {
+  EMAIL: 'email',
+  PASSWORD: 'lock',
+};
+
+const Input = ({ title, placeholder, value, iconName, ...props }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
+      <Text
+        style={[
+          styles.title,
+          isFocused && styles.focusedTitle,
+          isFocused && styles.hasValueTitle,
+        ]}
+      >
+        {title}
+      </Text>
       <TextInput
         {...props}
-        style={styles.input}
+        style={[
+          styles.input,
+          isFocused && styles.focusedInput,
+          isFocused && styles.hasValueInput,
+        ]}
         placeholder={placeholder ?? title}
-        placeholderTextColor={'#a3a3a3'}
+        placeholderTextColor={GRAY.DEFAULT}
         autoCapitalize="none"
         autoCorrect={false}
-        returnKeyType={returnKeyType}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
     </View>
   );
@@ -39,6 +62,7 @@ Input.propTypes = {
   keyboardType: PropTypes.oneOf(Object.values(keyboardTypes)),
   returnKeyType: PropTypes.oneOf(Object.values(returnKeyTypes)),
   secureTextEntry: PropTypes.bool,
+  value: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
@@ -49,12 +73,30 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 4,
+    color: GRAY.DEFAULT,
+  },
+  focusedTitle: {
+    fontWeight: '600',
+    color: PRIMARYA.DEFAULT,
   },
   input: {
-    height: 40,
-    margin: 12,
     borderWidth: 1,
-    padding: 10,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    height: 42,
+    borderColor: GRAY.DEFAULT,
+  },
+  focusedInput: {
+    borderWidth: 2,
+    borderColor: PRIMARYA.DEFAULT,
+    color: PRIMARYA.DEFAULT,
+  },
+  hasValueTitle: {
+    color: BLACK,
+  },
+  hasValueInput: {
+    borderColor: BLACK,
+    color: BLACK,
   },
 });
 
