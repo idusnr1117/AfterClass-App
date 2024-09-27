@@ -11,25 +11,17 @@ export const ReturnKeyTypes = {
   NEXT: 'next',
 };
 
-const Input = ({
-  title,
-  placeholder,
-  keyboardType,
-  returnKeyTypes,
-  secureTextEntry,
-}) => {
+const Input = ({ title, placeholder, ...props }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <TextInput
+        {...props}
         style={styles.input}
         placeholder={placeholder ?? title}
         placeholderTextColor={'#a3a3a3'}
         autoCapitalize="none"
         autoCorrect={false}
-        KeyboardType={keyboardType}
-        ReturnKeyTypes={returnKeyTypes}
-        secureTextEntry={secureTextEntry}
       />
     </View>
   );
