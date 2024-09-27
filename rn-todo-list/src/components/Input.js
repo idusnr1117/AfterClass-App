@@ -6,12 +6,12 @@ export const keyboardTypes = {
   EMAIL: 'email-address',
 };
 
-export const ReturnKeyTypes = {
+export const returnKeyTypes = {
   DONE: 'done',
   NEXT: 'next',
 };
 
-const Input = ({ title, placeholder, ...props }) => {
+const Input = ({ title, placeholder, returnKeyType, ...props }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -22,6 +22,7 @@ const Input = ({ title, placeholder, ...props }) => {
         placeholderTextColor={'#a3a3a3'}
         autoCapitalize="none"
         autoCorrect={false}
+        returnKeyType={returnKeyType}
       />
     </View>
   );
@@ -29,14 +30,14 @@ const Input = ({ title, placeholder, ...props }) => {
 
 Input.defaultProps = {
   keyboardType: keyboardTypes.DEFAULT,
-  returnKeyTypes: ReturnKeyTypes.DONE,
+  returnKeyType: returnKeyTypes.DONE,
 };
 
 Input.propTypes = {
   title: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   keyboardType: PropTypes.oneOf(Object.values(keyboardTypes)),
-  returnKeyTypes: PropTypes.oneOf(Object.values(ReturnKeyTypes)),
+  returnKeyType: PropTypes.oneOf(Object.values(returnKeyTypes)),
   secureTextEntry: PropTypes.bool,
 };
 
