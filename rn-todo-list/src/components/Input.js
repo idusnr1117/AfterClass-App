@@ -1,12 +1,12 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-export const keyboradTypes = {
-  DEFALUT: 'default',
+export const keyboardTypes = {
+  DEFAULT: 'default',
   EMAIL: 'email-address',
 };
 
-const Input = ({ title, placeholder, keyboradType }) => {
+const Input = ({ title, placeholder, keyboardType }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
@@ -16,20 +16,20 @@ const Input = ({ title, placeholder, keyboradType }) => {
         placeholderTextColor={'#a3a3a3'}
         autoCapitalize="none"
         autoCorrect={false}
-        keyboardType={keyboradType}
+        keyboardType={keyboardType}
       />
     </View>
   );
 };
 
 Input.defaultProps = {
-  keyboradType: keyboradTypes.DEFALUT,
+  keyboardType: keyboardTypes.DEFAULT,
 };
 
-Input.PropTypes = {
+Input.propTypes = {
   title: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
-  keyboradType: PropTypes.oneOf(Object.values(keyboradTypes)),
+  keyboardType: PropTypes.oneOf(Object.values(keyboardTypes)),
 };
 
 const styles = StyleSheet.create({

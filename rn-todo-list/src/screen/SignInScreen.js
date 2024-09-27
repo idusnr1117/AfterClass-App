@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Input, { keyboradTypes } from '../components/Input';
+import Input, { KeyboardTypes } from '../components/Input';
 
 const SignInScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={require('../../assets/main.png')} style={styles.image} />
 
-      <input
+      <Input
         title={'이메일'}
         placeholder="test@gmail.com"
-        keyboardType={keyboradTypes.EMAIL}
+        keyboardType={KeyboardTypes.EMAIL}
       />
-      <input title={'비밀번호'} />
+      <Input title={'비밀번호'} />
     </View>
   );
 };
