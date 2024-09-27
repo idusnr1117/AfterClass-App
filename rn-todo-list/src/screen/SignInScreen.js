@@ -10,6 +10,7 @@ const SignInScreen = () => {
         title={'이메일'}
         placeholder="test@gmail.com"
         keyboardType={keyboardTypes.EMAIL}
+        returnKeyType={returnKeyTypes.NEXT}
       />
       <Input
         title={'비밀번호'}
