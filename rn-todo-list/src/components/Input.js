@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { BLACK, GRAY, PRIMARYA } from '../colors';
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export const keyboardTypes = {
@@ -33,20 +33,40 @@ const Input = ({ title, placeholder, value, iconName, ...props }) => {
       >
         {title}
       </Text>
-      <TextInput
-        {...props}
-        style={[
-          styles.input,
-          isFocused && styles.focusedInput,
-          isFocused && styles.hasValueInput,
-        ]}
-        placeholder={placeholder ?? title}
-        placeholderTextColor={GRAY.DEFAULT}
-        autoCapitalize="none"
-        autoCorrect={false}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-      />
+      <View>
+        <TextInput
+          {...props}
+          ref={ref}
+          style={[
+            styles.input,
+            isFocused && styles.focusedInput,
+            value && styles.hasValueInput,
+          ]}
+          placeholder={placeholder ?? title}
+          placeholderTextColor={GRAY.DEFAULT}
+          autoCapitalize="none"
+          autoCorrect={false}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+
+        <View style={styles.icon}>
+          <MaterialCommunityIcons
+            name={iconName}
+            size={20}
+            color={(() => {
+              switch (true) {
+                case isFocused:
+                  return PRIMARYA.DEFAULT;
+                case !!value:
+                  return BLACK;
+                default:
+                  return GRAY.DEFAULT;
+              }
+            })()}
+          />
+        </View>
+      </View>
     </View>
   );
 };
@@ -63,6 +83,7 @@ Input.propTypes = {
   returnKeyType: PropTypes.oneOf(Object.values(returnKeyTypes)),
   secureTextEntry: PropTypes.bool,
   value: PropTypes.string,
+  iconName: PropTypes.oneOf(Object.values(IconNames)),
 };
 
 const styles = StyleSheet.create({
@@ -85,6 +106,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     height: 42,
     borderColor: GRAY.DEFAULT,
+    paddingLeft: 30,
   },
   focusedInput: {
     borderWidth: 2,
@@ -97,6 +119,12 @@ const styles = StyleSheet.create({
   hasValueInput: {
     borderColor: BLACK,
     color: BLACK,
+  },
+  icon: {
+    position: 'absolute',
+    left: 8,
+    height: '100%',
+    justifyContent: 'center',
   },
 });
 
