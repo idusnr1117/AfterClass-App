@@ -11,19 +11,18 @@ import { signIn } from '../api/auth';
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const passwrodRef = useRef(null);
-  const [disabled, setDiasbled] = useState(true);
+  const passwordRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setDiasbled(!email || !password);
+    setDisabled(!email || !password);
   }, [email, password]);
 
   const onSubmit = async () => {
     if (!isLoading && !disabled) {
       try {
         Keyboard.dismiss();
-        // console.log(email, password);
         const data = await signIn(email, password);
         console.log(data);
         setIsLoading(false);
@@ -47,10 +46,10 @@ const SignInScreen = () => {
         value={email}
         onChangeText={(email) => setEmail(email.trim())}
         iconName={IconNames.EMAIL}
-        onSubmitEditing={() => passwrodRef.current.focus()}
+        onSubmitEditing={() => passwordRef.current.focus()}
       />
       <Input
-        ref={passwrodRef}
+        ref={passwordRef}
         title={'비밀번호'}
         returnKeyType={returnKeyTypes.DONE}
         secureTextEntry
@@ -70,5 +69,23 @@ const SignInScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  image: {
+    width: 200,
+    height: 200,
+  },
+  buttonContainer: {
+    width: '100%',
+    marginTop: 30,
+    paddingHorizontal: 20,
+  },
+});
 
 export default SignInScreen;

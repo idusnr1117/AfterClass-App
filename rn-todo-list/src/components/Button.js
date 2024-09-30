@@ -2,14 +2,14 @@ import { Pressable, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import PropTypes from 'prop-types';
 import { PRIMARY, WHITE, GRAY } from '../colors';
 
-const Button = ({ title, onPress, disabled }) => {
+const Button = ({ title, onPress, disabled, isLoading }) => {
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
         styles.container,
-        pressed && { backgroudColor: PRIMARY.DARK },
-        disabled && { backgroudColor: PRIMARY.LIGHT, opacity: 0.6 },
+        pressed && { backgroundColor: PRIMARY.DARK },
+        disabled && { backgroundColor: PRIMARY.LIGHT, opacity: 0.6 },
       ]}
       disabled={disabled}
     >
@@ -18,12 +18,11 @@ const Button = ({ title, onPress, disabled }) => {
       ) : (
         <Text style={styles.title}>{title}</Text>
       )}
-      <Text style={styles.title}>{title}</Text>
     </Pressable>
   );
 };
 
-Button.PropTypes = {
+Button.propTypes = {
   title: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
