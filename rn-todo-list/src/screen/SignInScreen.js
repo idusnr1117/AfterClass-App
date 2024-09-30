@@ -22,7 +22,7 @@ const SignInScreen = () => {
   const onSubmit = async () => {
     if (!isLoading && !disabled) {
       try {
-        Keyboard.dimiss();
+        Keyboard.dismiss();
         // console.log(email, password);
         const data = await signIn(email, password);
         console.log(data);
