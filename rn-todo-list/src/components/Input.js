@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
-import { BLACK, GRAY, PRIMARYA } from '../colors';
+import { BLACK, GRAY, PRIMARY } from '../colors';
 import { useState, forwardRef } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -57,7 +57,7 @@ const Input = ({ title, placeholder, value, iconName, ...props }) => {
             color={(() => {
               switch (true) {
                 case isFocused:
-                  return PRIMARYA.DEFAULT;
+                  return PRIMARY.DEFAULT;
                 case !!value:
                   return BLACK;
                 default:
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   focusedTitle: {
     fontWeight: '600',
-    color: PRIMARYA.DEFAULT,
+    color: PRIMARY.DEFAULT,
   },
   input: {
     borderWidth: 1,
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
   },
   focusedInput: {
     borderWidth: 2,
-    borderColor: PRIMARYA.DEFAULT,
-    color: PRIMARYA.DEFAULT,
+    borderColor: PRIMARY.DEFAULT,
+    color: PRIMARY.DEFAULT,
   },
   hasValueTitle: {
     color: BLACK,
