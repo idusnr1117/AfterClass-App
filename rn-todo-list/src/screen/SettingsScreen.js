@@ -1,9 +1,9 @@
-import { StyleSheet, View } from "react-native";
-import Button, { ButtonTypes } from "../components/Button";
-import { useUserContext } from "../contexts/UserContext";
+import { StyleSheet, View } from 'react-native';
+import Button , { ButtonTypes } from '../components/Button';
+import { useUserContext } from '../contexts/UserContext';
 
 const SettingsScreen = () => {
-  return (
+    return (
     <View style={styles.container}>
       <Button
         title="로그아웃"
@@ -17,7 +17,7 @@ const SettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
 });
