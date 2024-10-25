@@ -106,7 +106,6 @@ import PropTypes from 'prop-types';
                 bottom: KeyboardHeight,
                 width: inputWidth,
             },
-            isOpened && {width:windowWidth - 20},
           ]}
         >
             <TextInput 
