@@ -23,20 +23,24 @@ const SignInScreen = () => {
     setDisabled(!email || !password);
   }, [email, password]);
 
-  const onSubmit = async (setUser) => {
+  const onSubmit = async () => {
+    // 인자를 받지 않도록 수정
     if (!isLoading && !disabled) {
       try {
-        Keyboard.dismiss();
+        setIsLoading(true);
         const data = await signIn(email, password);
-        console.log(data);
-        setIsLoading(false);
-        setUser(data);
+        console.log("111", data); // 성공 로그
+        setUser(data); // 유저 설정
       } catch (error) {
-        Alert.alert("로그인 실패", error, [
+        console.log("222", typeof error); // 에러 타입 확인
+        const errorMessage =
+          typeof error === "string" ? error : JSON.stringify(error);
+        Alert.alert("로그인 실패", errorMessage, [
           { text: "확인", onPress: () => setIsLoading(false) },
         ]);
+      } finally {
+        setIsLoading(false); // 최종적으로 로딩 상태를 false로 설정
       }
-      setIsLoading(false);
     }
   };
 
@@ -66,7 +70,7 @@ const SignInScreen = () => {
       <View style={styles.buttonContainer}>
         <Button
           title="로그인"
-          onPress={onSubmit}
+          onPress={onSubmit} // setUser 인자를 전달하지 않음
           disabled={disabled}
           isLoading={isLoading}
         />
